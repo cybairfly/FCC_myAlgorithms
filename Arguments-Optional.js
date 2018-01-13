@@ -1,3 +1,35 @@
+function addTogether() {
+  
+  function numOnly(args) {
+    return Array.prototype.every.call(args, isNumber);
+  }
+  
+  function isNumber(arg) {
+    return typeof arg === 'number';
+  }
+  
+  function addArgs(stack, next) {
+    return stack + next;
+  }
+  
+  if (numOnly(arguments)) {
+    if (arguments.length >= 2) {
+      return [].slice.call(arguments).reduce(addArgs);
+    }
+    else {
+      var arg1 = arguments[0];//create closure variable
+      return function(arg2) {
+        if (numOnly(arguments)) return arg1 + arg2;
+      };
+    }
+  }
+  else return undefined;
+
+}
+
+addTogether(2,3);
+
+/*
 
 function addTogether() {
   
@@ -29,4 +61,4 @@ function addTogether() {
   //return arguments[0] + arguments[1];
 }
 
-addTogether(2,3);
+*/
